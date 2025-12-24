@@ -12,5 +12,8 @@ This calculator performs basic operations (addition, subtraction, multiplication
 - Unitary/not unitary
 - Create identity matrix
 
+## Dependencies
+This project requires the NumPy library. Use `pip install numpy` (pip) or `conda install numpy` (Anaconda) command(s).
+
 ## Tutorial
 Pending.
