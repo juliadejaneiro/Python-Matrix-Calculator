@@ -1,4 +1,4 @@
-# Matrix Calculator
+# Python Matrix Calculator
 A simple matrix calculator to practice my Python and linear algebra skills.
 This calculator performs basic operations (addition, subtraction, multiplication), although there are plans for additional functionalities.
 
@@ -10,7 +10,7 @@ This calculator performs basic operations (addition, subtraction, multiplication
 - Transpose
 - Conjugate transpose
 - Unitary/not unitary
-- Create identity matrix
+- Submatrix/partition
 
 ## Dependencies
 This project requires the NumPy library. Use `pip install numpy` (pip) or `conda install numpy` (Anaconda) command(s).
