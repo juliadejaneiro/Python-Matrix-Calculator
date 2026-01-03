@@ -16,5 +16,5 @@ This calculator performs basic operations (addition, subtraction, multiplication
 This project requires the NumPy library. Use `pip install numpy` (pip) or `conda install numpy` (Anaconda) command(s).
 For more information, consult the official NumPy resource: [NumPy - Installing NumPy](https://numpy.org/install/).
 
-## Tutorial
+## Functionality
 Pending.
