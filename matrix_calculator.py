@@ -30,7 +30,6 @@ class Matrix:
         n: row
         new_value: a value to replace entry in row m column n'''
         self.matrix[m, n] = new_value
-        print(self)
         return self.matrix
     
     def add(self, data_or_matrix):
@@ -68,15 +67,9 @@ class Matrix:
         For each entry in the original matrix, switch the values in the index tuple.
         Place the entry in the new index of the empty matrix 
         (using change_entry) until all values are filled.'''
-        new_row = []
-        transposed = []
+        transposed = self.create_empty()
         for index, entry in np.ndenumerate(self.matrix):
-            if index[1] == self.n:
-                new_row.append(entry)
-                transposed.append(new_row)
-                new_row = []
-            else:
-                new_row.append(entry)
+                transposed.change_entry(index[1], index[0], entry)
         return transposed
 
     def unitary(self):
@@ -85,9 +78,9 @@ class Matrix:
 def main():
     data = [[1, 2], [3, 4]]
     matrix1 = Matrix(2, 2, data)
-    print(matrix1)
+    # print(matrix1)
 
-    print(matrix1.create_empty())
+    print(matrix1.transpose())
 
     # data2 = [[5, 6], [7, 8]]
     # matrix2 = Matrix(2, 2, data2)
