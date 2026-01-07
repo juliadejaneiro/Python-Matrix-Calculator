@@ -1,4 +1,4 @@
-# A simple real number matrix calculator using Python classes.
+# A simple matrix calculator using Python classes.
 import numpy as np
 
 class Matrix:
@@ -15,6 +15,13 @@ class Matrix:
         '''Print Matrix object with dimensions.'''
         print_str = "{}\n with dimensions {} x {}".format(self.matrix, self.m, self.n)
         return print_str
+    
+    def create_empty(self):
+        '''Create a new empty Matrix object of the same size as the Matrix object it is
+        applied to.'''
+        empty = np.zeros_like(self.matrix)
+        empty_matrix = Matrix(self.m, self.n, empty)
+        return empty_matrix
     
     def change_entry(self, m, n, new_value):
         '''Change an entry in the Matrix.
@@ -50,45 +57,44 @@ class Matrix:
             result = np.subtract(self.matrix, add_matrix)
         return result
 
-data = [[1, 2], [3, 4]]
-matrix1 = Matrix(2, 2, data)
-print(matrix1)
+    def multiply(self, data_or_matrix):
+        pass
 
-matrix1.change_entry(0, 0, 4)
+    def inverse(self):
+        pass
 
-# data2 = [[5, 6], [7, 8]]
-# matrix2 = Matrix(2, 2, data2)
-# print(matrix1)
+    def transpose(self):
+        '''Create an empty matrix of the specified size.
+        For each entry in the original matrix, switch the values in the index tuple.
+        Place the entry in the new index of the empty matrix 
+        (using change_entry) until all values are filled.'''
+        new_row = []
+        transposed = []
+        for index, entry in np.ndenumerate(self.matrix):
+            if index[1] == self.n:
+                new_row.append(entry)
+                transposed.append(new_row)
+                new_row = []
+            else:
+                new_row.append(entry)
+        return transposed
 
-# result = matrix1.sub(matrix2)
-# print(result)
+    def unitary(self):
+        pass
 
-# def main():
-#     try:
-#         get_dims = input('Enter the dimensions of the matrix separated by spaces: ')
-#         sep_dims = get_dims.split()
+def main():
+    data = [[1, 2], [3, 4]]
+    matrix1 = Matrix(2, 2, data)
+    print(matrix1)
 
-#         # If a negative integer was passed, it will be changed to positive.
-#         # If the number is a float, it will be converted to int (rounded down).
-#         m = abs(int(sep_dims[0]))
-#         n = abs(int(sep_dims[1]))
+    print(matrix1.create_empty())
 
-#         check_dims = check_zero(m, n)
+    # data2 = [[5, 6], [7, 8]]
+    # matrix2 = Matrix(2, 2, data2)
+    # print(matrix1)
 
-#     except ZeroValueError:
-#         print("Please enter nonzero values for the dimensions.")
-#         raise
+    # result = matrix1.sub(matrix2)
+    # print(result)
 
-#     except ValueError:
-#         print("Input formatted incorrectly. Check for correct input types and space separation.")
-#         raise
-
-#     else:
-#         print("Program completed without errors.")
-    
-#     print(f"Matrix dimensions: {check_dims[0]} x {check_dims[1]}")
-
-#     # Enter values for matrix entries. If the number of values is less than the number of entries, the remaining entries will be filled with 0's.
-
-# if __name__=="__main__":
-#     main()
+if __name__=="__main__":
+    main()
