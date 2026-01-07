@@ -17,15 +17,15 @@ class Matrix:
         return print_str
     
     def create_empty(self, *args):
-        '''Create a new empty Matrix object of the same size as the Matrix object it is
+        '''Create a new empty Matrix object of the same dimensions as the Matrix object it is
         applied to.
-        If additional arguments are present, create the matrix of the specified size.
-        If only one additional argument, that value is used for both dimensions.
-        If more than two values in args, only the first two are considered.'''
+        *args: int value(s) to create a Matrix of a specified size
+        If only one additional argument, the value is used for both dimensions (m x m).
+        If more than two values in args, only the first two are considered (m x n).'''
         if args and len(args) >= 2:
-            empty_matrix = (args[0], args[1],  np.zeros((args[0], args[1])))
+            empty_matrix = Matrix(args[0], args[1],  np.zeros_like(self.matrix, shape=(args[0], args[1])))
         elif args and len(args) == 1:
-            empty_matrix = (args[0], args[0],  np.zeros((args[0], args[0])))
+            empty_matrix = Matrix(args[0], args[0],  np.zeros_like(self.matrix, shape=(args[0], args[0])))
         else:
             empty_matrix = Matrix(self.m, self.n, np.zeros_like(self.matrix))
         return empty_matrix
@@ -45,7 +45,7 @@ class Matrix:
     def add(self, data_or_matrix):
         '''Add a Matrix object to another Matrix object, nparray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
-        Takes one argument: 
+        Takes one argument. 
         data_or_matrix: Matrix object, nparray, or nested list. '''
         if isinstance(data_or_matrix, Matrix):
             result = self.matrix + data_or_matrix.matrix
@@ -58,7 +58,7 @@ class Matrix:
         '''Subtract a Matrix object from another Matrix object, ndarray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument.
-        data_or_matrix: Matrix object, nparray, or nested list. '''
+        data_or_matrix: Matrix object, nparray, or nested list'''
         if isinstance(data_or_matrix, Matrix):
             result = self.matrix - data_or_matrix.matrix
         else:
@@ -67,15 +67,19 @@ class Matrix:
         return result
 
     def multiply(self, data_or_matrix):
-        '''Multiply the Matrix object with another Matrix object, ndarray, or nested list.
+        '''Multiply the Matrix object (A) with another Matrix object, ndarray, or nested list (B).
+        Number of columns in A must match number of rows in B.
+        Calculates AB = C.
         Takes one argument.
-        data_or_matrix: Matrix object, nparray, or nested list.'''
-        multiplied = self.create_empty()
+        data_or_matrix: Matrix object, ndarray, or nested list'''
+        multiplied = self.create_empty(self.n, len(data_or_matrix))
         for index, entry in np.ndenumerate(self.matrix):
-            values = data_or_matrix[index[0], :]
-            for vindex, value in enumerate(values):
+            multiply_values = data_or_matrix[index[1]]
+            # print("The value is:", entry)
+            # print("The multipliers are", multiply_values)
+            for vindex, value in enumerate(multiply_values):
                 new_value = entry * value
-                multiplied.matrix[index[0], vindex[1]] += new_value
+                multiplied.matrix[index[0], vindex] += new_value
         return multiplied
 
     def inverse(self):
@@ -98,13 +102,13 @@ def main():
     data = [[1, 2], [3, 4]]
     matrix1 = Matrix(2, 2, data)
     print(matrix1)
+    print(matrix1.create_empty(3, 4, 5))
+    # print(matrix1.transpose())
 
-    print(matrix1.transpose())
-
-    # data2 = [[5, 6], [7, 8]]
-    # matrix2 = Matrix(2, 2, data2)
+    data2 = [[5, 6], [7, 8]]
+    matrix2 = Matrix(2, 2, data2)
     # print(matrix1)
-
+    print(matrix1.multiply(matrix2))
     # result = matrix1.sub(matrix2)
     # print(result)
 
