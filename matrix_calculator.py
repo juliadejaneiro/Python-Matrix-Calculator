@@ -72,11 +72,17 @@ class Matrix:
         Calculates AB = C.
         Takes one argument.
         data_or_matrix: Matrix object, ndarray, or nested list'''
-        multiplied = self.create_empty(self.n, len(data_or_matrix))
+        # Create empty matrix with dimensions n (columns of A) and p (rows of B).
+        # Two instances for Matrix object and nested list/ndarray.
+        if isinstance(data_or_matrix, Matrix):
+            multiplied =  self.create_empty(self.n, len(data_or_matrix.matrix))
+        else:
+            multiplied = self.create_empty(self.n, len(data_or_matrix))
         for index, entry in np.ndenumerate(self.matrix):
-            multiply_values = data_or_matrix[index[1]]
-            # print("The value is:", entry)
-            # print("The multipliers are", multiply_values)
+            if isinstance(data_or_matrix, Matrix):
+                multiply_values = data_or_matrix.matrix[index[1]]
+            else:
+                multiply_values = data_or_matrix[index[1]]
             for vindex, value in enumerate(multiply_values):
                 new_value = entry * value
                 multiplied.matrix[index[0], vindex] += new_value
