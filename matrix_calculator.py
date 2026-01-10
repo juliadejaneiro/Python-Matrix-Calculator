@@ -105,16 +105,45 @@ class Matrix:
         pass
 
 def main():
-    data = [[1, 2], [3, 4]]
-    matrix1 = Matrix(2, 2, data)
-    print(matrix1)
-    print(matrix1.create_empty(3, 4, 5))
+    dims_str = input('Enter number of rows and columns separated by a space: ')
+    dims_list = list(map(int, dims_str.split()))
+    rows, cols = dims_list[0], dims_list[1]
+
+    data = []
+    print(f'Enter the {cols} entries of each row separated by a space: ')
+    data = [list(map(int, input().split())) for _ in range(rows)]
+    matrix = Matrix(rows, cols, data)
+    print(matrix)
+    while True:
+        print('\nAVAILABLE COMMANDS')
+        print('--------------------')
+        print('Add',
+        'Sub',
+        'Multiply',
+        'Transpose', sep='\n')
+        print('X to quit\n')
+        response = input().lower()
+        if response == 'x':
+            print('Goodbye!')
+            break
+        elif response == 'add':
+            print(f'Enter the {cols} entries for each row of the new matrix separated by a space: ')
+            add_data = [list(map(int, input().split())) for _ in range(rows)]
+            print('\nResult:\n', matrix.add(add_data))
+
+
+    # matrix = Matrix(int(dims_list[0]), int(dims_list[1]), data)
+    # print(matrix)
+    # data = [[1, 2], [3, 4]]
+    # matrix1 = Matrix(2, 2, data)
+    # print(type(matrix1))
+    # print(matrix1.create_empty(3, 4, 5))
     # print(matrix1.transpose())
 
-    data2 = [[5, 6], [7, 8]]
-    matrix2 = Matrix(2, 2, data2)
-    # print(matrix1)
-    print(matrix1.multiply(matrix2))
+    # data2 = [[5, 6], [7, 8]]
+    # matrix2 = Matrix(2, 2, data2)
+    # # print(matrix1)
+    # print(matrix1.multiply(matrix2))
     # result = matrix1.sub(matrix2)
     # print(result)
 
