@@ -114,22 +114,43 @@ def main():
     data = [list(map(int, input().split())) for _ in range(rows)]
     matrix = Matrix(rows, cols, data)
     print(matrix)
+    
     while True:
         print('\nAVAILABLE COMMANDS')
         print('--------------------')
         print('Add',
-        'Sub',
+        'Subtract',
         'Multiply',
         'Transpose', sep='\n')
         print('X to quit\n')
+        
         response = input().lower()
-        if response == 'x':
-            print('Goodbye!')
-            break
-        elif response == 'add':
-            print(f'Enter the {cols} entries for each row of the new matrix separated by a space: ')
-            add_data = [list(map(int, input().split())) for _ in range(rows)]
-            print('\nResult:\n', matrix.add(add_data))
+        
+        match response:
+            case 'x':
+                print('Goodbye!')
+                break
+
+            case 'add':
+                print(f'Enter the {cols} entries for each row of the matrix you want to add separated by a space: ')
+                add_data = [list(map(int, input().split())) for _ in range(rows)]
+                print('\nResult:\n', matrix.add(add_data))
+
+            case 'subtract':
+                print(f'Enter the {cols} entries for each row of the matrix you want to subtract separated by a space: ')
+                add_data = [list(map(int, input().split())) for _ in range(rows)]
+                print('\nResult:\n', matrix.add(add_data))
+
+            case 'multiply':
+                print(f'Enter the {cols} entries for each row of the matrix you want to multiply separated by a space: ')
+                multiply_data = [list(map(int, input().split())) for _ in range(rows)]
+                print('\nResult:\n', matrix.multiply(multiply_data))
+
+            case 'transpose':
+                print('\nResult:\n', matrix.transpose())
+
+            case _:
+                print('Unknown command. Please enter a valid command from the menu.')
 
 
     # matrix = Matrix(int(dims_list[0]), int(dims_list[1]), data)
