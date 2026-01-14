@@ -1,6 +1,9 @@
 # A simple matrix calculator using Python classes.
 import numpy as np
 
+
+# UPDATE: Ask what operation to perform first, then get the matrices. Check matrices for compatibility.
+
 class Matrix:
     def __init__(self, m, n, data):
         '''Set Matrix object attributes.
