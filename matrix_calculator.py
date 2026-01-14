@@ -105,17 +105,10 @@ class Matrix:
         pass
 
 def main():
-    dims_str = input('Enter number of rows and columns separated by a space: ')
-    dims_list = list(map(int, dims_str.split()))
-    rows, cols = dims_list[0], dims_list[1]
-
-    data = []
-    print(f'Enter the {cols} entries of each row separated by a space: ')
-    data = [list(map(int, input().split())) for _ in range(rows)]
-    matrix = Matrix(rows, cols, data)
-    print(matrix)
     
     while True:
+        response = input('Select a command.')
+
         print('\nAVAILABLE COMMANDS')
         print('--------------------')
         print('Add',
@@ -125,6 +118,10 @@ def main():
         print('X to quit\n')
         
         response = input().lower()
+
+        dims_str = input('\nEnter number of rows and columns separated by a space: ')
+        dims_list = list(map(int, dims_str.split()))
+        rows, cols = dims_list[0], dims_list[1]
         
         match response:
             case 'x':
@@ -132,22 +129,42 @@ def main():
                 break
 
             case 'add':
-                print(f'Enter the {cols} entries for each row of the matrix you want to add separated by a space: ')
-                add_data = [list(map(int, input().split())) for _ in range(rows)]
-                print('\nResult:\n', matrix.add(add_data))
+                print(f'Enter the {cols} entries for each row of the first matrix (A) to add (separated by space): ')
+                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix1 = Matrix(rows, cols, add_data1)
+
+                print(f'Enter the {cols} entries for each row of the second matrix to add (separated by space): ')
+                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix2 = Matrix(rows, cols, add_data2)
+
+                print('\nResult:\n', matrix1.add(matrix2))
 
             case 'subtract':
-                print(f'Enter the {cols} entries for each row of the matrix you want to subtract separated by a space: ')
-                add_data = [list(map(int, input().split())) for _ in range(rows)]
-                print('\nResult:\n', matrix.add(add_data))
+                print(f'Enter the {cols} entries for each row of the first matrix (A) to subtract (separated by space): ')
+                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix1 = Matrix(rows, cols, add_data1)
+
+                print(f'Enter the {cols} entries for each row of the second matrix (B) to subtract (separated by space): ')
+                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix2 = Matrix(rows, cols, add_data2)
+
+                print('\nResult:\n', matrix1.sub(matrix2))
 
             case 'multiply':
-                print(f'Enter the {cols} entries for each row of the matrix you want to multiply separated by a space: ')
-                multiply_data = [list(map(int, input().split())) for _ in range(rows)]
-                print('\nResult:\n', matrix.multiply(multiply_data))
+                print(f'Enter the {cols} entries for each row of the first matrix (A) to multiply (separated by space): ')
+                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix1 = Matrix(rows, cols, add_data1)
+
+                print(f'Enter the {cols} entries for each row of the second matrix (B) to multiply (separated by space): ')
+                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix2 = Matrix(rows, cols, add_data2)
+
+                print('\nResult:\n', matrix1.multiply(matrix2))
 
             case 'transpose':
-                print('\nResult:\n', matrix.transpose())
+                print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
+                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
+                matrix1 = Matrix(rows, cols, add_data1)
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
