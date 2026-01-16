@@ -45,47 +45,32 @@ class Matrix:
         self.matrix[m, n] = new_value
         return self.matrix
     
-    def add(self, data_or_matrix):
+    def add(self, matrix_B):
         '''Add a Matrix object to another Matrix object, nparray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument. 
         data_or_matrix: Matrix object, nparray, or nested list. '''
-        if isinstance(data_or_matrix, Matrix):
-            result = self.matrix + data_or_matrix.matrix
-        else:
-            add_matrix = np.array(data_or_matrix)
-            result = np.add(self.matrix, add_matrix)
+        result = self.matrix + matrix_B.matrix
         return result
     
-    def sub(self, data_or_matrix):
+    def sub(self, matrix_B):
         '''Subtract a Matrix object from another Matrix object, ndarray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument.
         data_or_matrix: Matrix object, nparray, or nested list'''
-        if isinstance(data_or_matrix, Matrix):
-            result = self.matrix - data_or_matrix.matrix
-        else:
-            add_matrix = np.array(data_or_matrix)
-            result = np.subtract(self.matrix, add_matrix)
+        result = self.matrix - matrix_B.matrix
         return result
 
-    def multiply(self, data_or_matrix):
+    def multiply(self, matrix_B):
         '''Multiply the Matrix object (A) with another Matrix object, ndarray, or nested list (B).
         Number of columns in A must match number of rows in B.
         Calculates AB = C.
         Takes one argument.
         data_or_matrix: Matrix object, ndarray, or nested list'''
         # Create empty matrix with dimensions n (columns of A) and p (rows of B).
-        # Two instances for Matrix object and nested list/ndarray.
-        if isinstance(data_or_matrix, Matrix):
-            multiplied =  self.create_empty(self.n, len(data_or_matrix.matrix))
-        else:
-            multiplied = self.create_empty(self.n, len(data_or_matrix))
+        multiplied =  self.create_empty(self.n, len(matrix_B.matrix))
         for index, entry in np.ndenumerate(self.matrix):
-            if isinstance(data_or_matrix, Matrix):
-                multiply_values = data_or_matrix.matrix[index[1]]
-            else:
-                multiply_values = data_or_matrix[index[1]]
+            multiply_values = matrix_B.matrix[index[1]]
             for vindex, value in enumerate(multiply_values):
                 new_value = entry * value
                 multiplied.matrix[index[0], vindex] += new_value
@@ -110,64 +95,63 @@ class Matrix:
 def main():
     
     while True:
-        response = input('Select a command.')
-
         print('\nAVAILABLE COMMANDS')
         print('--------------------')
         print('Add',
         'Subtract',
         'Multiply',
-        'Transpose', sep='\n')
-        print('X to quit\n')
-        
+        'Transpose',
+        'X to quit', sep='\n')
+
+        response = input('Select a command.')
         response = input().lower()
 
-        dims_str = input('\nEnter number of rows and columns separated by a space: ')
-        dims_list = list(map(int, dims_str.split()))
-        rows, cols = dims_list[0], dims_list[1]
-        
         match response:
             case 'x':
                 print('Goodbye!')
                 break
 
-            case 'add':
-                print(f'Enter the {cols} entries for each row of the first matrix (A) to add (separated by space): ')
-                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix1 = Matrix(rows, cols, add_data1)
+            case 'add' | 'sub' | 'subtract':
+                dims_str = input('\nEnter number of rows and columns separated by a space: ')
+                dims_list = list(map(int, dims_str.split()))
+                rows, cols = dims_list[0], dims_list[1]
 
-                print(f'Enter the {cols} entries for each row of the second matrix to add (separated by space): ')
-                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix2 = Matrix(rows, cols, add_data2)
+                print(f'Enter the {cols} entries for each row of the first matrix (A): ')
+                data_A = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_A = Matrix(rows, cols, data_A)
 
-                print('\nResult:\n', matrix1.add(matrix2))
-
-            case 'subtract':
-                print(f'Enter the {cols} entries for each row of the first matrix (A) to subtract (separated by space): ')
-                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix1 = Matrix(rows, cols, add_data1)
-
-                print(f'Enter the {cols} entries for each row of the second matrix (B) to subtract (separated by space): ')
-                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix2 = Matrix(rows, cols, add_data2)
-
-                print('\nResult:\n', matrix1.sub(matrix2))
+                print(f'Enter the {cols} entries for each row of the second matrix (B): ')
+                data_B = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_B = Matrix(rows, cols, data_B)
+                
+                if response == 'add':
+                    print('\nResult of adding:\n', matrix_A.add(matrix_B))
+                else:
+                    print('\nResult of subtracting:\n', matrix_A.sub(matrix_B))
 
             case 'multiply':
-                print(f'Enter the {cols} entries for each row of the first matrix (A) to multiply (separated by space): ')
-                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix1 = Matrix(rows, cols, add_data1)
+                dims_A_str = input('\nEnter number of rows and columns for matrix A (separated by a space): ')
+                dims_A_list = list(map(int, dims_A_str.split()))
+                rows_A, cols_A = dims_A_list[0], dims_A_list[1]
 
-                print(f'Enter the {cols} entries for each row of the second matrix (B) to multiply (separated by space): ')
-                add_data2 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix2 = Matrix(rows, cols, add_data2)
+                print(f'Enter the {cols} entries for each row of matrix A (separated by space): ')
+                data_A = [list(map(int, input().split())) for _ in range(rows_A)]
+                matrix_A = Matrix(rows_A, cols_A, data_A)
 
-                print('\nResult:\n', matrix1.multiply(matrix2))
+                cols_B_str = input('\nEnter number of columns for matrix B: ')
+                cols_B = int(cols_B_str)
+
+                print(f'Enter the {cols_B} entries for each row of matrix B (separated by space): ')
+                data_B = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_B = Matrix(cols_A, cols_B, data_B)
+
+                print('\n Result of multiplication:\n', matrix_A.multiply(matrix_B))
 
             case 'transpose':
                 print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
-                add_data1 = [list(map(int, input().split())) for _ in range(rows)]
-                matrix1 = Matrix(rows, cols, add_data1)
+                data_A = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_A = Matrix(rows, cols, data_A)
+                print('\nResult of transpose:\n', matrix_A.transpose())
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
