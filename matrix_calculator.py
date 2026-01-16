@@ -142,7 +142,7 @@ def main():
                 cols_B = int(cols_B_str)
 
                 print(f'Enter the {cols_B} entries for each row of matrix B (separated by space): ')
-                data_B = [list(map(int, input().split())) for _ in range(rows)]
+                data_B = [list(map(int, input().split())) for _ in range(cols_A)]
                 matrix_B = Matrix(cols_A, cols_B, data_B)
 
                 print('\n Result of multiplication:\n', matrix_A.multiply(matrix_B))
