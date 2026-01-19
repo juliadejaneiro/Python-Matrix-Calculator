@@ -1,9 +1,6 @@
 # A simple matrix calculator using Python classes.
 import numpy as np
 
-
-# UPDATE: Ask what operation to perform first, then get the matrices. Check matrices for compatibility.
-
 class Matrix:
     def __init__(self, m, n, data):
         '''Set Matrix object attributes.
@@ -46,20 +43,27 @@ class Matrix:
         return self.matrix
     
     def add(self, matrix_b):
-        '''Add a Matrix object to another Matrix object, nparray, or nested list.
-        Both Matrix object and data_or_matrix must have the same dimensions.
+        '''Add a Matrix object to another Matrix object.
+        Both Matrix object and matrix_b must have the same dimensions.
         Takes one argument. 
         matrix_b: Matrix object'''
-        result = self.matrix + matrix_b.matrix
-        return result
+        # result = self.matrix + matrix_b.matrix
+        added =  self.create_empty(self.m, self.n)
+        for index, entry in np.ndenumerate(self.matrix):
+            added_entry = entry + matrix_b.matrix[index[0], index[1]]
+            added.matrix[index[0], index[1]] += added_entry
+        return added
     
     def sub(self, matrix_b):
         '''Subtract a Matrix object from another Matrix object, ndarray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument.
         matrix_b: Matrix object'''
-        result = self.matrix - matrix_b.matrix
-        return result
+        subtracted =  self.create_empty(self.m, self.n)
+        for index, entry in np.ndenumerate(self.matrix):
+            subtracted_entry = entry - matrix_b.matrix[index[0], index[1]]
+            subtracted.matrix[index[0], index[1]] += subtracted_entry
+        return subtracted
 
     def multiply(self, matrix_b):
         '''Multiply the Matrix object (A) with another Matrix object, ndarray, or nested list (B).
@@ -104,7 +108,6 @@ def main():
         'X to quit', sep='\n')
 
         response = input('\nEnter a command.\n').lower()
-        # response = input().lower()
 
         match response:
             case 'x':
@@ -159,22 +162,6 @@ def main():
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
-
-
-    # matrix = Matrix(int(dims_list[0]), int(dims_list[1]), data)
-    # print(matrix)
-    # data = [[1, 2], [3, 4]]
-    # matrix1 = Matrix(2, 2, data)
-    # print(type(matrix1))
-    # print(matrix1.create_empty(3, 4, 5))
-    # print(matrix1.transpose())
-
-    # data2 = [[5, 6], [7, 8]]
-    # matrix2 = Matrix(2, 2, data2)
-    # # print(matrix1)
-    # print(matrix1.multiply(matrix2))
-    # result = matrix1.sub(matrix2)
-    # print(result)
 
 if __name__=="__main__":
     main()
