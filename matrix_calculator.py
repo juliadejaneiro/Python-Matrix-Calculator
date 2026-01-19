@@ -45,32 +45,32 @@ class Matrix:
         self.matrix[m, n] = new_value
         return self.matrix
     
-    def add(self, matrix_B):
+    def add(self, matrix_b):
         '''Add a Matrix object to another Matrix object, nparray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument. 
-        data_or_matrix: Matrix object, nparray, or nested list. '''
-        result = self.matrix + matrix_B.matrix
+        matrix_b: Matrix object'''
+        result = self.matrix + matrix_b.matrix
         return result
     
-    def sub(self, matrix_B):
+    def sub(self, matrix_b):
         '''Subtract a Matrix object from another Matrix object, ndarray, or nested list.
         Both Matrix object and data_or_matrix must have the same dimensions.
         Takes one argument.
-        data_or_matrix: Matrix object, nparray, or nested list'''
-        result = self.matrix - matrix_B.matrix
+        matrix_b: Matrix object'''
+        result = self.matrix - matrix_b.matrix
         return result
 
-    def multiply(self, matrix_B):
+    def multiply(self, matrix_b):
         '''Multiply the Matrix object (A) with another Matrix object, ndarray, or nested list (B).
         Number of columns in A must match number of rows in B.
         Calculates AB = C.
         Takes one argument.
-        data_or_matrix: Matrix object, ndarray, or nested list'''
+        matrix_b: Matrix object, ndarray, or nested list'''
         # Create empty matrix with dimensions n (columns of A) and p (rows of B).
-        multiplied =  self.create_empty(self.n, len(matrix_B.matrix))
+        multiplied =  self.create_empty(self.n, len(matrix_b.matrix))
         for index, entry in np.ndenumerate(self.matrix):
-            multiply_values = matrix_B.matrix[index[1]]
+            multiply_values = matrix_b.matrix[index[1]]
             for vindex, value in enumerate(multiply_values):
                 new_value = entry * value
                 multiplied.matrix[index[0], vindex] += new_value
@@ -103,8 +103,8 @@ def main():
         'Transpose',
         'X to quit', sep='\n')
 
-        response = input('Select a command.')
-        response = input().lower()
+        response = input('\nEnter a command.\n').lower()
+        # response = input().lower()
 
         match response:
             case 'x':
@@ -117,41 +117,45 @@ def main():
                 rows, cols = dims_list[0], dims_list[1]
 
                 print(f'Enter the {cols} entries for each row of the first matrix (A): ')
-                data_A = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_A = Matrix(rows, cols, data_A)
+                data_a = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_a = Matrix(rows, cols, data_a)
 
                 print(f'Enter the {cols} entries for each row of the second matrix (B): ')
-                data_B = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_B = Matrix(rows, cols, data_B)
+                data_b = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_b = Matrix(rows, cols, data_b)
                 
                 if response == 'add':
-                    print('\nResult of adding:\n', matrix_A.add(matrix_B))
+                    print('\nResult of adding:\n', matrix_a.add(matrix_b))
                 else:
-                    print('\nResult of subtracting:\n', matrix_A.sub(matrix_B))
+                    print('\nResult of subtracting:\n', matrix_a.sub(matrix_b))
 
             case 'multiply':
-                dims_A_str = input('\nEnter number of rows and columns for matrix A (separated by a space): ')
-                dims_A_list = list(map(int, dims_A_str.split()))
-                rows_A, cols_A = dims_A_list[0], dims_A_list[1]
+                dims_a_str = input('\nEnter number of rows and columns for matrix A (separated by a space): ')
+                dims_a_list = list(map(int, dims_a_str.split()))
+                rows_a, cols_a = dims_a_list[0], dims_a_list[1]
 
-                print(f'Enter the {cols} entries for each row of matrix A (separated by space): ')
-                data_A = [list(map(int, input().split())) for _ in range(rows_A)]
-                matrix_A = Matrix(rows_A, cols_A, data_A)
+                print(f'Enter the {cols_a} entries for each row of matrix A (separated by space): ')
+                data_a = [list(map(int, input().split())) for _ in range(rows_a)]
+                matrix_a = Matrix(rows_a, cols_a, data_a)
 
-                cols_B_str = input('\nEnter number of columns for matrix B: ')
-                cols_B = int(cols_B_str)
+                cols_b_str = input('\nEnter number of columns for matrix B: ')
+                cols_b = int(cols_b_str)
 
-                print(f'Enter the {cols_B} entries for each row of matrix B (separated by space): ')
-                data_B = [list(map(int, input().split())) for _ in range(cols_A)]
-                matrix_B = Matrix(cols_A, cols_B, data_B)
+                print(f'Enter the {cols_b} entries for each row of matrix B (separated by space): ')
+                data_b = [list(map(int, input().split())) for _ in range(cols_a)]
+                matrix_b = Matrix(cols_a, cols_b, data_b)
 
-                print('\n Result of multiplication:\n', matrix_A.multiply(matrix_B))
+                print('\n Result of multiplication:\n', matrix_a.multiply(matrix_b))
 
             case 'transpose':
+                dims_str = input('\nEnter number of rows and columns separated by a space: ')
+                dims_list = list(map(int, dims_str.split()))
+                rows, cols = dims_list[0], dims_list[1]
+
                 print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
-                data_A = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_A = Matrix(rows, cols, data_A)
-                print('\nResult of transpose:\n', matrix_A.transpose())
+                data_a = [list(map(int, input().split())) for _ in range(rows)]
+                matrix_a = Matrix(rows, cols, data_a)
+                print('\nResult of transpose:\n', matrix_a.transpose())
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
