@@ -112,10 +112,8 @@ class Matrix:
         pass
 
     def transpose(self):
-        """Create an empty matrix of the specified size.
-        For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
-        Place the entry in the new index of the empty matrix
-        (using change_entry) until all values are filled.
+        """For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
+        Place the entry in the empty matrix (using change_entry) until all values are filled.
         """
         transposed = self.create_empty()
         for index, entry in np.ndenumerate(self.matrix):
