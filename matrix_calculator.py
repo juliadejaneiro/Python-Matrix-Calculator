@@ -2,11 +2,22 @@
 import numpy as np
 
 class Matrix:
+    """A Matrix object to perform matrix operations.
+
+    Attributes:
+        m : int indicating the number of columns.
+        n: int indicating the number of rows.
+        data: nested list of numerical matrix entries.
+    """
+
     def __init__(self, m, n, data):
-        """Set Matrix object attributes.
-        m : number of columns
-        n: number of rows
-        data: nested list or ndarray"""
+        """Initialize Matrix object.
+
+        Arguments:
+            m: set the number of columns.
+            n: set the number of rows.
+            data: content of the matrix.
+        """
         self.m = m
         self.n = n
         self.matrix = np.array(data)
@@ -19,9 +30,13 @@ class Matrix:
     def create_empty(self, *args):
         """Create a new empty Matrix object of the same dimensions as the Matrix object it is
         applied to.
-        *args: int value(s) to create a Matrix of a specified size
+
+        Arguments:
+            *args: int value(s) to create a Matrix of a specified size
+
         If only one additional argument, the value is used for both dimensions (m x m).
-        If more than two values in args, only the first two are considered (m x n)."""
+        If more than two values in args, only the first two are considered (m x n).
+        """
         if args and len(args) >= 2:
             empty_matrix = Matrix(args[0], args[1],  np.zeros_like(self.matrix, shape=(args[0], args[1])))
         elif args and len(args) == 1:
@@ -35,17 +50,22 @@ class Matrix:
     
     def change_entry(self, m, n, new_value):
         """Change an entry in the Matrix.
-        m: column
-        n: row
-        new_value: a value to replace entry in row m column n"""
+
+        Arguments:
+            m: int number of columns.
+            n: int number of rows.
+            new_value: a numerical value to replace entry in row m column n.
+        """
         self.matrix[m, n] = new_value
         return self.matrix
     
     def add(self, matrix_b):
         """Add a Matrix object to another Matrix object.
         Both Matrix object and matrix_b must have the same dimensions.
-        Takes one argument.
-        matrix_b: Matrix object"""
+
+        Arguments:
+            matrix_b: Matrix object.
+        """
         added =  self.create_empty(self.m, self.n)
         for index, entry in np.ndenumerate(self.matrix):
             added_entry = entry + matrix_b.matrix[index[0], index[1]]
@@ -53,9 +73,12 @@ class Matrix:
         return added
     
     def sub(self, matrix_b):
-        """Subtract a Matrix object from another Matrix object, ndarray, or nested list.
-        Both Matrix object and data_or_matrix must have the same dimensions.
-        matrix_b: Matrix object"""
+        """Subtract a Matrix object from another Matrix object.
+        Both Matrix object and matrix_b must have the same dimensions.
+
+        Arguments:
+            matrix_b: Matrix object.
+        """
         subtracted =  self.create_empty(self.m, self.n)
         for index, entry in np.ndenumerate(self.matrix):
             subtracted_entry = entry - matrix_b.matrix[index[0], index[1]]
@@ -65,10 +88,12 @@ class Matrix:
     def multiply(self, matrix_b):
         """Multiply the Matrix object (A) with another Matrix object (B).
         Number of columns in A must match number of rows in B.
-        Calculates AB = C.
-        matrix_b: Matrix object"""
-        # Create empty matrix with dimensions m (rows of A) and p (columns of B).
+
+        Arguments:
+            matrix_b: Matrix object.
+        """
         columns_b = matrix_b.matrix.shape[1]
+        # Create empty matrix with dimensions m (rows of A) and p (columns of B).
         multiplied =  self.create_empty(self.m, columns_b)
         # For each entry in matrix A, take the values from matrix B to multiply with.
         for a_index, entry in np.ndenumerate(self.matrix):
@@ -90,9 +115,9 @@ class Matrix:
         """Create an empty matrix of the specified size.
         For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
         Place the entry in the new index of the empty matrix
-        (using change_entry) until all values are filled."""
+        (using change_entry) until all values are filled.
+        """
         transposed = self.create_empty()
-        # For entry a with indexes (i, j), transposed indexes have the values switched (j, i).
         for index, entry in np.ndenumerate(self.matrix):
                 transposed.change_entry(index[1], index[0], entry)
         return transposed
