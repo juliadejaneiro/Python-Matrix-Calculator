@@ -29,7 +29,7 @@ class Matrix:
     
     def create_empty(self, *args):
         """Create a new empty Matrix object of the same dimensions as the Matrix object it is
-        applied to.
+        called on.
 
         Arguments:
             *args: int value(s) to create a Matrix of a specified size
@@ -52,8 +52,8 @@ class Matrix:
         """Change an entry in the Matrix.
 
         Arguments:
-            m: int number of columns.
-            n: int number of rows.
+            m: int row number.
+            n: int column number.
             new_value: a numerical value to replace entry in row m column n.
         """
         self.matrix[m, n] = new_value
@@ -149,11 +149,11 @@ def main():
                 dims_list = list(map(int, dims_str.split()))
                 rows, cols = dims_list[0], dims_list[1]
 
-                print(f'Enter the {cols} entries for each row of the first matrix (A): ')
+                print(f'Enter the {cols} entries for each row of the first matrix (separated by a space): ')
                 data_a = [list(map(int, input().split())) for _ in range(rows)]
                 matrix_a = Matrix(rows, cols, data_a)
 
-                print(f'Enter the {cols} entries for each row of the second matrix (B): ')
+                print(f'Enter the {cols} entries for each row of the second matrix (separated by a space): ')
                 data_b = [list(map(int, input().split())) for _ in range(rows)]
                 matrix_b = Matrix(rows, cols, data_b)
                 
@@ -163,18 +163,18 @@ def main():
                     print('\nResult of subtracting:\n', matrix_a.sub(matrix_b))
 
             case 'multiply':
-                dims_a_str = input('\nEnter number of rows and columns for matrix A (separated by a space): ')
+                dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
                 dims_a_list = list(map(int, dims_a_str.split()))
                 rows_a, cols_a = dims_a_list[0], dims_a_list[1]
 
-                print(f'Enter the {cols_a} entries for each row of matrix A (separated by space): ')
+                print(f'Enter the {cols_a} entries for each row of the first matrix (separated by a space): ')
                 data_a = [list(map(int, input().split())) for _ in range(rows_a)]
                 matrix_a = Matrix(rows_a, cols_a, data_a)
 
-                cols_b_str = input('\nEnter number of columns for matrix B: ')
+                cols_b_str = input('\nEnter number of columns for the second matrix: ')
                 cols_b = int(cols_b_str)
 
-                print(f'Enter the {cols_b} entries for each row of matrix B (separated by space): ')
+                print(f'Enter the {cols_b} entries for each row of the second matrix (separated by a space): ')
                 data_b = [list(map(int, input().split())) for _ in range(cols_a)]
                 matrix_b = Matrix(cols_a, cols_b, data_b)
 
