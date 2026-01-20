@@ -23,7 +23,7 @@ You will encounter a menu of available commands. Enter the desired command when 
 
 
 
-Specify the dimensions of the matrix using two int values with a space between.
+Specify the dimensions of the matrix by entering two int values with a space between.
 Then, enter the appropriate number of entries with spaces between. The entries on each line represent a row in the matrix.
 
 <img width="596" height="188" alt="example" src="https://github.com/user-attachments/assets/6cdb98fa-bfd1-4ed4-8d0f-1267d4f573b3" />
