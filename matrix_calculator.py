@@ -118,7 +118,6 @@ class Matrix:
         """
         transpose = self.create_empty(self.n, self.m)
         for index, entry in np.ndenumerate(self.matrix):
-            print(index)
             transpose.matrix[index[1], index[0]] += entry
         return transpose
 
