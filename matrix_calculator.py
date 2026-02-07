@@ -29,7 +29,7 @@ class Matrix:
     
     def create_empty(self, *args):
         """Create a new empty Matrix object of the same dimensions as the Matrix object it is
-        called on.
+        called by.
 
         Arguments:
             *args: int value(s) to create a Matrix of a specified size
