@@ -3,10 +3,17 @@ A simple matrix calculator to practice my Python and linear algebra skills.
 This calculator performs basic operations (addition, subtraction, multiplication), although there are plans for additional functionalities.
 The calculator assumes user input is correct; validation of user input is to be added.
 
+## Known Issues
+Temporarily remove matrix multiplication and transpose.
+Index error with matrix multiplication and transpose on matrices of certain dimensions. Pending fixes.
+
+## Updates
+Allow user to repeat operations without returning to the command menu.
+
 ## Operations
 - Addition & subtraction (completed)
-- Matrix multiplication (completed)
-- Transpose (completed)
+- Matrix multiplication (under revision)
+- Transpose (under revision)
 - Inverse (incomplete)
 - Conjugate transpose (incomplete)
 - Unitary/not unitary (incomplete)
