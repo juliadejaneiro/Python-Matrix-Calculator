@@ -112,14 +112,15 @@ class Matrix:
         pass
 
     def transpose(self):
-        """For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
+        """Create a matrix transpose of dimensions n x m. Number of rows and columns are switched.
+        For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
         Place the entry in the empty matrix (using change_entry) until all values are filled.
         """
-        transposed = self.create_empty(self.n, self.m)
+        transpose = self.create_empty(self.n, self.m)
         for index, entry in np.ndenumerate(self.matrix):
             print(index)
-            transposed.matrix[index[1], index[0]] += entry
-        return transposed
+            transpose.matrix[index[1], index[0]] += entry
+        return transpose
 
     def unitary(self):
         pass
