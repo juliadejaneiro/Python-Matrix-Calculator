@@ -45,7 +45,7 @@ Then, enter the appropriate number of entries with spaces between. The entries o
 
 
 
-The result is displayed. The user may repeat the operation and enter values for new matrices, or return to the command menu.
+The result is displayed. The user may repeat the operation and enter values or return to the command menu.
 
 <img width="229" height="184" alt="image" src="https://github.com/user-attachments/assets/f80b70cb-8e5a-426a-9df2-47166b760db0" />
 
