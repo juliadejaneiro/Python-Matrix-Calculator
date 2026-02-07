@@ -19,7 +19,7 @@ This resulted in an Index Error for matrices where m != n, as the number of rows
 
 ## Operations
 - Addition & subtraction (completed)
-- Matrix multiplication (under revision)
+- Matrix multiplication (under revision as of 2/06)
 - Transpose (completed)
 - Inverse (incomplete)
 - Conjugate transpose (incomplete)
