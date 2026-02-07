@@ -19,10 +19,11 @@ For more information, consult the official NumPy resource: [NumPy - Installing N
 Run the Python script matrix_calculator.py.
 You will encounter a menu of available commands. Enter the desired command when prompted.
 
-<img width="215" height="275" alt="example_prompt" src="https://github.com/user-attachments/assets/ca0ec4aa-23ab-48cb-91df-8d5f5c3f0e69" />
+<img width="170" height="219" alt="image" src="https://github.com/user-attachments/assets/3d60480e-6967-4860-80f0-6715947a2b76" />
 
 
-Specify the dimensions of the matrix using two int values with a space between.
+
+Specify the dimensions of the matrix by entering two int values with a space between.
 Then, enter the appropriate number of entries with spaces between. The entries on each line represent a row in the matrix.
 
 <img width="596" height="188" alt="example" src="https://github.com/user-attachments/assets/6cdb98fa-bfd1-4ed4-8d0f-1267d4f573b3" />
