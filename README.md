@@ -4,8 +4,16 @@ This calculator performs basic operations (addition, subtraction, multiplication
 The calculator assumes user input is correct; validation of user input is to be added.
 
 ## Known Issues
-Temporarily remove matrix multiplication and transpose.
-Index error with matrix multiplication and transpose on matrices of certain dimensions. Pending fixes.
+Temporarily remove matrix multiplication.
+Errors with matrix multiplication on matrices of certain dimensions.
+
+## Fixes
+(6/07)
+The Index Error encountered with transpose operation has been fixed.
+The error stemmed from incorrect initialization of the transposed matrix with the `create_empty` method.
+No parameters were passed, creating a matrix of the same dimensions as the input matrix.
+This resulted in an Index Error for matrices where m != n, as the number of columns may exceed the number of rows or vice versa.
+
 
 ## Updates
 Allow user to repeat operations without returning to the command menu.
