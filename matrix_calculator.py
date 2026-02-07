@@ -115,7 +115,7 @@ class Matrix:
         """For each entry in the original matrix, switch the values in the index tuple. (index[1], index[0])
         Place the entry in the empty matrix (using change_entry) until all values are filled.
         """
-        transposed = self.create_empty()
+        transposed = self.create_empty(self.n, self.m)
         for index, entry in np.ndenumerate(self.matrix):
             print(index)
             transposed.matrix[index[1], index[0]] += entry
@@ -134,6 +134,7 @@ def main():
         print('--------------------')
         print('Add',
         'Subtract',
+        'Transpose',
         'X to quit', sep='\n')
 
         response = input('\nEnter a command.\n').lower()
@@ -199,25 +200,25 @@ def main():
             #                 print('\nInvalid input. Terminating operation.')
             #                 break
 
-            # case 'transpose':
-            #     repeat = ""
-            #     while repeat != 'n':
-            #         dims_str = input('\nEnter number of rows and columns separated by a space: ')
-            #         dims_list = list(map(int, dims_str.split()))
-            #         rows, cols = dims_list[0], dims_list[1]
+            case 'transpose':
+                repeat = ""
+                while repeat != 'n':
+                    dims_str = input('\nEnter number of rows and columns separated by a space: ')
+                    dims_list = list(map(int, dims_str.split()))
+                    rows, cols = dims_list[0], dims_list[1]
 
-            #         print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
-            #         data_a = [list(map(int, input().split())) for _ in range(rows)]
-            #         matrix_a = Matrix(rows, cols, data_a)
-            #         print('\nResult of transpose:\n', matrix_a.transpose())
+                    print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
+                    data_a = [list(map(int, input().split())) for _ in range(rows)]
+                    matrix_a = Matrix(rows, cols, data_a)
+                    print('\nResult of transpose:\n', matrix_a.transpose())
 
-            #         repeat = input('\nDo another transpose? (y/n)\n').lower()
-            #         match repeat:
-            #             case 'n':
-            #                  print('\nReturning to menu.')
-            #             case repeat if repeat != 'y':
-            #                 print('\nInvalid input. Terminating operation.')
-            #                 break
+                    repeat = input('\nDo another transpose? (y/n)\n').lower()
+                    match repeat:
+                        case 'n':
+                             print('\nReturning to menu.')
+                        case repeat if repeat != 'y':
+                            print('\nInvalid input. Terminating operation.')
+                            break
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
