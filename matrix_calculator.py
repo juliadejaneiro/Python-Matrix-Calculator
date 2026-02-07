@@ -117,7 +117,8 @@ class Matrix:
         """
         transposed = self.create_empty()
         for index, entry in np.ndenumerate(self.matrix):
-                transposed.change_entry(index[1], index[0], entry)
+            print(index)
+            transposed.matrix[index[1], index[0]] += entry
         return transposed
 
     def unitary(self):
@@ -133,8 +134,6 @@ def main():
         print('--------------------')
         print('Add',
         'Subtract',
-        'Multiply',
-        'Transpose',
         'X to quit', sep='\n')
 
         response = input('\nEnter a command.\n').lower()
@@ -145,50 +144,80 @@ def main():
                 break
 
             case 'add' | 'sub' | 'subtract':
-                dims_str = input('\nEnter number of rows and columns separated by a space: ')
-                dims_list = list(map(int, dims_str.split()))
-                rows, cols = dims_list[0], dims_list[1]
+                repeat = ""
+                while repeat != 'n':
+                    dims_str = input('\nEnter number of rows and columns separated by a space: ')
+                    dims_list = list(map(int, dims_str.split()))
+                    rows, cols = dims_list[0], dims_list[1]
 
-                print(f'Enter the {cols} entries for each row of the first matrix (separated by a space): ')
-                data_a = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_a = Matrix(rows, cols, data_a)
+                    print(f'Enter the {cols} entries for each row of the first matrix (separated by a space): ')
+                    data_a = [list(map(int, input().split())) for _ in range(rows)]
+                    matrix_a = Matrix(rows, cols, data_a)
 
-                print(f'Enter the {cols} entries for each row of the second matrix (separated by a space): ')
-                data_b = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_b = Matrix(rows, cols, data_b)
+                    print(f'Enter the {cols} entries for each row of the second matrix (separated by a space): ')
+                    data_b = [list(map(int, input().split())) for _ in range(rows)]
+                    matrix_b = Matrix(rows, cols, data_b)
                 
-                if response == 'add':
-                    print('\nResult of adding:\n', matrix_a.add(matrix_b))
-                else:
-                    print('\nResult of subtracting:\n', matrix_a.sub(matrix_b))
+                    if response == 'add':
+                        print('\nResult of adding:\n', matrix_a.add(matrix_b))
+                        repeat = input('\nDo another addition? (y/n)\n').lower()
+                    else:
+                        print('\nResult of subtracting:\n', matrix_a.sub(matrix_b))
+                        repeat = input('\nDo another subtraction? (y/n)\n').lower()
 
-            case 'multiply':
-                dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
-                dims_a_list = list(map(int, dims_a_str.split()))
-                rows_a, cols_a = dims_a_list[0], dims_a_list[1]
+                    match repeat:
+                        case 'n':
+                            print('\nReturning to menu.')
+                        case repeat if repeat != 'y':
+                            print('\nInvalid input. Terminating operation.')
+                            break
 
-                print(f'Enter the {cols_a} entries for each row of the first matrix (separated by a space): ')
-                data_a = [list(map(int, input().split())) for _ in range(rows_a)]
-                matrix_a = Matrix(rows_a, cols_a, data_a)
+            # case 'multiply':
+            #     repeat = ""
+            #     while repeat != 'n':
+            #         dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
+            #         dims_a_list = list(map(int, dims_a_str.split()))
+            #         rows_a, cols_a = dims_a_list[0], dims_a_list[1]
 
-                cols_b_str = input('\nEnter number of columns for the second matrix: ')
-                cols_b = int(cols_b_str)
+            #         print(f'Enter the {cols_a} entries for each row of the first matrix (separated by a space): ')
+            #         data_a = [list(map(int, input().split())) for _ in range(rows_a)]
+            #         matrix_a = Matrix(rows_a, cols_a, data_a)
 
-                print(f'Enter the {cols_b} entries for each row of the second matrix (separated by a space): ')
-                data_b = [list(map(int, input().split())) for _ in range(cols_a)]
-                matrix_b = Matrix(cols_a, cols_b, data_b)
+            #         cols_b_str = input('\nEnter number of columns for the second matrix: ')
+            #         cols_b = int(cols_b_str)
 
-                print('\n Result of multiplication:\n', matrix_a.multiply(matrix_b))
+            #         print(f'Enter the {cols_b} entries for each row of the second matrix (separated by a space): ')
+            #         data_b = [list(map(int, input().split())) for _ in range(cols_a)]
+            #         matrix_b = Matrix(cols_a, cols_b, data_b)
+            #         print('\nResult of multiplication:\n', matrix_a.multiply(matrix_b))
+                    
+            #         repeat = input('\nDo another multiplication? (y/n)\n').lower()
+            #         match repeat:
+            #             case 'n':
+            #                 print('\nReturning to menu.')
+            #             case repeat if repeat != 'y':
+            #                 print('\nInvalid input. Terminating operation.')
+            #                 break
 
-            case 'transpose':
-                dims_str = input('\nEnter number of rows and columns separated by a space: ')
-                dims_list = list(map(int, dims_str.split()))
-                rows, cols = dims_list[0], dims_list[1]
+            # case 'transpose':
+            #     repeat = ""
+            #     while repeat != 'n':
+            #         dims_str = input('\nEnter number of rows and columns separated by a space: ')
+            #         dims_list = list(map(int, dims_str.split()))
+            #         rows, cols = dims_list[0], dims_list[1]
 
-                print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
-                data_a = [list(map(int, input().split())) for _ in range(rows)]
-                matrix_a = Matrix(rows, cols, data_a)
-                print('\nResult of transpose:\n', matrix_a.transpose())
+            #         print(f'Enter the {cols} entries for each row of the matrix to transpose (separated by space): ')
+            #         data_a = [list(map(int, input().split())) for _ in range(rows)]
+            #         matrix_a = Matrix(rows, cols, data_a)
+            #         print('\nResult of transpose:\n', matrix_a.transpose())
+
+            #         repeat = input('\nDo another transpose? (y/n)\n').lower()
+            #         match repeat:
+            #             case 'n':
+            #                  print('\nReturning to menu.')
+            #             case repeat if repeat != 'y':
+            #                 print('\nInvalid input. Terminating operation.')
+            #                 break
 
             case _:
                 print('Unknown command. Please enter a valid command from the menu.')
