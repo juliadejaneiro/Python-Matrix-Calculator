@@ -8,14 +8,14 @@ Temporarily remove matrix multiplication.
 Errors with matrix multiplication on matrices of certain dimensions.
 
 ## Fixes
-**6/07:** The Index Error encountered with `transpose` method has been fixed.
+**2/07:** The Index Error encountered with `transpose` method has been fixed.
 The error stemmed from incorrect initialization of the matrix transpose with the `create_empty` method.
 No parameters were passed, creating a matrix of the same dimensions as the input matrix.
 This resulted in an Index Error for matrices where m != n, as the number of rows may exceed the number of columns or vice versa.
 
 
 ## Updates
-**6/06:** Allow user to repeat operations without returning to the command menu.
+**2/06:** Allow user to repeat operations without returning to the command menu.
 
 ## Operations
 - Addition & subtraction (completed)
