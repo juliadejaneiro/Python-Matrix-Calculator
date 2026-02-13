@@ -3,15 +3,14 @@ A simple matrix calculator to practice my Python and linear algebra skills.
 This calculator performs basic operations (addition, subtraction, multiplication), although there are plans for additional functionalities.
 The calculator assumes user input is correct; validation of user input is to be added.
 
-## Known Issues
-Temporarily remove matrix multiplication.
-Errors with matrix multiplication on matrices of certain dimensions.
-
 ## Fixes
 **2/07:** The Index Error caused by `transpose` method has been fixed.
 The error stemmed from incorrect initialization of the matrix transpose with the `create_empty` method.
 No parameters were passed, creating a matrix of the same dimensions as the input matrix.
 This resulted in an Index Error for matrices where m != n, as the number of rows may exceed the number of columns or vice versa.
+
+**2/12:** Error with matrix multiplication has been addressed. Each entry in matrix A was erroneously multiplied with the entries in each column of matrix B.
+The entries of matrix A rows are now multiplied with entries of matching index from matrix B columns.
 
 
 ## Updates
