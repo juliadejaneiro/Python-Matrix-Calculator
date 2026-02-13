@@ -92,18 +92,18 @@ class Matrix:
         Arguments:
             matrix_b: Matrix object.
         """
-        columns_b = matrix_b.matrix.shape[1]
+        num_columns_b = matrix_b.matrix.shape[1]
         # Create empty matrix with dimensions m (rows of A) and p (columns of B).
-        multiplied =  self.create_empty(self.m, columns_b)
+        multiplied =  self.create_empty(self.m, num_columns_b)
         
         # For each row in matrix A, multiply each element in the row with the corresponding element in each column of matrix B.
         # Add values to the appropriate index; the index is the row index of A and column index of B.
         for i in range(self.m):
-            a_values = self.matrix[i, :]
-            for j in range(columns_b):
-                b_values = matrix_b.matrix[:, j]
+            a_row = self.matrix[i, :]
+            for j in range(num_columns_b):
+                b_column = matrix_b.matrix[:, j]
                 for k in range(self.n):
-                    new_value = a_values[k] * b_values[k]
+                    new_value = a_row[k] * b_column[k]
                     multiplied.matrix[i, j] += new_value
         return multiplied
 
@@ -138,6 +138,7 @@ def main():
         'X to quit', sep='\n')
 
         response = input('\nEnter a command.\n').lower()
+        repeat = ''
 
         match response:
             case 'x':
@@ -145,7 +146,6 @@ def main():
                 break
 
             case 'add' | 'sub' | 'subtract':
-                repeat = ""
                 while repeat != 'n':
                     dims_str = input('\nEnter number of rows and columns separated by a space: ')
                     dims_list = list(map(int, dims_str.split()))
@@ -174,7 +174,6 @@ def main():
                             break
 
             case 'multiply':
-                repeat = ""
                 while repeat != 'n':
                     dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
                     dims_a_list = list(map(int, dims_a_str.split()))
@@ -201,7 +200,6 @@ def main():
                             break
 
             case 'transpose':
-                repeat = ""
                 while repeat != 'n':
                     dims_str = input('\nEnter number of rows and columns separated by a space: ')
                     dims_list = list(map(int, dims_str.split()))
