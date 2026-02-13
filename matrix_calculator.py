@@ -95,17 +95,16 @@ class Matrix:
         columns_b = matrix_b.matrix.shape[1]
         # Create empty matrix with dimensions m (rows of A) and p (columns of B).
         multiplied =  self.create_empty(self.m, columns_b)
-        # For each entry in matrix A, take the values from matrix B to multiply with.
-        for a_index, entry in np.ndenumerate(self.matrix):
-            # The values from B correspond to the column number of the matrix A entry.
-            b_values = matrix_b.matrix[a_index[1]]
-            # Multiply entry from A with each value from B to produce a new_value.
-            for b_index, b_value in enumerate(b_values):
-                new_value = entry * b_value
-                # Add each new_value to the correct position in the multiplied matrix.
-                # The correct position is the row of entry A and the column of each
-                # value in b_values.
-                multiplied.matrix[a_index[0], b_index] += new_value
+        
+        # For each row in matrix A, multiply each element in the row with the corresponding element in each column of matrix B.
+        # Add values to the appropriate index; the index is the row index of A and column index of B.
+        for i in range(self.m):
+            a_values = self.matrix[i, :]
+            for j in range(columns_b):
+                b_values = matrix_b.matrix[:, j]
+                for k in range(self.n):
+                    new_value = a_values[k] * b_values[k]
+                    multiplied.matrix[i, j] += new_value
         return multiplied
 
     def inverse(self):
@@ -134,6 +133,7 @@ def main():
         print('--------------------')
         print('Add',
         'Subtract',
+        'Multiply',
         'Transpose',
         'X to quit', sep='\n')
 
@@ -173,32 +173,32 @@ def main():
                             print('\nInvalid input. Terminating operation.')
                             break
 
-            # case 'multiply':
-            #     repeat = ""
-            #     while repeat != 'n':
-            #         dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
-            #         dims_a_list = list(map(int, dims_a_str.split()))
-            #         rows_a, cols_a = dims_a_list[0], dims_a_list[1]
+            case 'multiply':
+                repeat = ""
+                while repeat != 'n':
+                    dims_a_str = input('\nEnter number of rows and columns for the first matrix: ')
+                    dims_a_list = list(map(int, dims_a_str.split()))
+                    rows_a, cols_a = dims_a_list[0], dims_a_list[1]
 
-            #         print(f'Enter the {cols_a} entries for each row of the first matrix (separated by a space): ')
-            #         data_a = [list(map(int, input().split())) for _ in range(rows_a)]
-            #         matrix_a = Matrix(rows_a, cols_a, data_a)
+                    print(f'Enter the {cols_a} entries for each row of the first matrix (separated by a space): ')
+                    data_a = [list(map(int, input().split())) for _ in range(rows_a)]
+                    matrix_a = Matrix(rows_a, cols_a, data_a)
 
-            #         cols_b_str = input('\nEnter number of columns for the second matrix: ')
-            #         cols_b = int(cols_b_str)
+                    cols_b_str = input('\nEnter number of columns for the second matrix: ')
+                    cols_b = int(cols_b_str)
 
-            #         print(f'Enter the {cols_b} entries for each row of the second matrix (separated by a space): ')
-            #         data_b = [list(map(int, input().split())) for _ in range(cols_a)]
-            #         matrix_b = Matrix(cols_a, cols_b, data_b)
-            #         print('\nResult of multiplication:\n', matrix_a.multiply(matrix_b))
+                    print(f'Enter the {cols_b} entries for each row of the second matrix (separated by a space): ')
+                    data_b = [list(map(int, input().split())) for _ in range(cols_a)]
+                    matrix_b = Matrix(cols_a, cols_b, data_b)
+                    print('\nResult of multiplication:\n', matrix_a.multiply(matrix_b))
                     
-            #         repeat = input('\nDo another multiplication? (y/n)\n').lower()
-            #         match repeat:
-            #             case 'n':
-            #                 print('\nReturning to menu.')
-            #             case repeat if repeat != 'y':
-            #                 print('\nInvalid input. Terminating operation.')
-            #                 break
+                    repeat = input('\nDo another multiplication? (y/n)\n').lower()
+                    match repeat:
+                        case 'n':
+                            print('\nReturning to menu.')
+                        case repeat if repeat != 'y':
+                            print('\nInvalid input. Terminating operation.')
+                            break
 
             case 'transpose':
                 repeat = ""
