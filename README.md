@@ -18,8 +18,8 @@ The entries of matrix A rows are now multiplied with entries of matching index f
 
 ## Operations
 - Addition & subtraction (completed)
-- Matrix multiplication (under revision as of 2/06)
-- Transpose (completed)
+- Matrix multiplication (completed, revised 2/12)
+- Transpose (completed, revised 2/07)
 - Inverse (incomplete)
 - Conjugate transpose (incomplete)
 - Unitary/not unitary (incomplete)
