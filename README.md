@@ -8,7 +8,7 @@ Temporarily remove matrix multiplication.
 Errors with matrix multiplication on matrices of certain dimensions.
 
 ## Fixes
-**2/07:** The Index Error encountered with `transpose` method has been fixed.
+**2/07:** The Index Error caused by `transpose` method has been fixed.
 The error stemmed from incorrect initialization of the matrix transpose with the `create_empty` method.
 No parameters were passed, creating a matrix of the same dimensions as the input matrix.
 This resulted in an Index Error for matrices where m != n, as the number of rows may exceed the number of columns or vice versa.
@@ -45,7 +45,7 @@ Then, enter the appropriate number of entries with spaces between. The entries o
 
 
 
-The result is displayed. The user may repeat the operation and enter values for new matrices, or return to the command menu.
+The result is displayed. The user may repeat the operation and enter values or return to the command menu.
 
 <img width="229" height="184" alt="image" src="https://github.com/user-attachments/assets/f80b70cb-8e5a-426a-9df2-47166b760db0" />
 
