@@ -4,7 +4,7 @@ This calculator performs basic operations (addition, subtraction, multiplication
 The calculator assumes user input is correct; validation of user input is to be added.
 
 ## Fixes
-**2/07 Tranpose Error:** The Index Error caused by `transpose` method has been fixed.
+**2/07 Transpose Error:** The Index Error caused by `transpose` method has been fixed.
 The error stemmed from incorrect initialization of the matrix transpose with the `create_empty` method.
 No parameters were passed, creating a matrix of the same dimensions as the input matrix.
 This resulted in an Index Error for matrices where m != n, as the number of rows may exceed the number of columns or vice versa.
